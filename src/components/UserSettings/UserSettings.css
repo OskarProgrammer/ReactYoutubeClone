@@ -1,0 +1,32 @@
+
+
+.userContainer {
+    display:flex;
+    justify-content: left;
+}
+
+.userContainer > div {
+    background-color: red;
+    width: 33%;
+    margin: 20px;
+    border-radius: 50px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    padding: 30px;
+}
+
+.userContainer > div > p > button {
+    border-radius: 50px;
+    border: 0;
+    padding: 15px;
+    margin: 5px;
+    font-size: 30px;
+    transition: 0.5s ease;
+}
+
+.userContainer > div > p > button:hover {
+    background-color: black;
+    color: red;
+}

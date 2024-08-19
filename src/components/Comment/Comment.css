@@ -1,0 +1,8 @@
+.commentDiv {
+    background-color: rgb(202, 8, 8);
+    border-radius: 50px;
+    margin: 5px;
+    padding: 30px;
+    font-size: 20px;
+    text-align: left;
+}

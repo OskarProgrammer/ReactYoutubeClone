@@ -1,0 +1,19 @@
+
+.filmTabss {
+    background-color: red;
+    padding: 25px;
+    width: 10%;
+    height: 10%;
+    margin: 5px;
+    text-wrap: wrap;
+    border-radius: 50px;
+    box-shadow: 0px 0px 20px red;
+}
+
+.filmTabss:hover {
+    cursor: pointer;
+}
+
+hr {
+    border-color: black;
+}

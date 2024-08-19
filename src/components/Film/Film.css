@@ -1,0 +1,10 @@
+.filmTab {
+    margin: 15px;
+    background-color: aliceblue;
+    padding:20px;
+    border-radius: 50px;
+}
+
+.filmTab:hover {
+    cursor: pointer;
+}
