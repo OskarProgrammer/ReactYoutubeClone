@@ -31,6 +31,7 @@ const UserSettings = (props) => {
                             return <Film
                                 filmInfo={film}
                                 onOpenFilm={props.onOpenFilm}
+                                onRemoveFilm={props.onRemoveFilm}
                             />
                         }
                     })}

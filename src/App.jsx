@@ -23,8 +23,9 @@ const initialFilms = [
     filmKey: 2,
     title: "Pierwszy Film",
     desc: "To jest pierwzsy przykladowy filmik",
-    link: "link",
-    lajki: [],
+    link: "https://www.youtube.com/embed/gAyJOLokqqY?list=RDgAyJOLokqqY",
+    likes: [],
+    disLikes: []
   },
   {
     ownerKey: 1,
@@ -32,8 +33,9 @@ const initialFilms = [
     filmKey: crypto.randomUUID(),
     title: "Drugi Film",
     desc: "To jest drugi przykladowy filmik",
-    link: "link",
-    lajki: [],
+    link: "https://www.youtube.com/embed/_CXRLUqxyds?list=RDgAyJOLokqqY",
+    likes: [],
+    disLikes: [],
   }
 ]
 
@@ -130,19 +132,19 @@ function App() {
       films.map((film)=>{
         if (film.filmKey == filmKey) {
           let i = 0
-          film.lajki.map((lajk)=>{
+          film.likes.map((lajk)=>{
             if (lajk == ownerKey){
                i = 1
             }
           })
           if (i != 0){
             let newLajki = []
-            film.lajki.map((lajk)=>{
+            film.likes.map((lajk)=>{
               if (lajk != ownerKey){newLajki.push(lajk)}
             })
-            film.lajki = newLajki
+            film.likes = newLajki
           }else{
-            film.lajki.push(ownerKey)
+            film.likes.push(ownerKey)
           }
         }
       })
@@ -157,11 +159,37 @@ function App() {
       title: title,
       desc: desc,
       link: link,
-      lajki: [],
+      likes: [],
+      disLikes: []
     }
 
     films = [...films, newFilm]
     setFilms(films)
+  }
+
+  const removeFilm = (filmKey) => {
+    let newFilms = []
+
+    films.map((film)=>{
+      if (film.filmKey !== filmKey) {
+        newFilms.push(film)
+      }
+    })
+
+    films = newFilms
+    setFilms(films)
+
+    let newComments = []
+
+    comments.map((comment)=>{
+      if (comment.filmKey !== filmKey){
+        newComments.push(comment)
+      }
+    })
+
+    comments = newComments
+    setComments(comments)
+
   }
 
 
@@ -176,9 +204,11 @@ function App() {
           onChangePass={changePassword} 
           onChangeName={changeName} 
           onLoginForm={()=>{setIsLoginForm(true)}} 
+          onRemoveFilm={removeFilm}
           comments={comments} 
           films={films} 
           currentUserData={currentUserData}/> : ""}
+
       {isLoginForm ? <LoginForm 
           onBack={()=>{setIsLoginForm(false)}} 
           handleLogin={loginToSite}/> : ""}

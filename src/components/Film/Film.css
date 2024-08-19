@@ -8,3 +8,11 @@
 .filmTab:hover {
     cursor: pointer;
 }
+
+.filmTab > button {
+    border-radius: 50px;
+    padding:20px;
+    border: 0;
+    background-color: red;
+    color:antiquewhite;
+}

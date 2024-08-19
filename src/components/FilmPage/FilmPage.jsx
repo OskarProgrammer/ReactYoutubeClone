@@ -23,20 +23,51 @@ const FilmPage = (props) => {
     return (
         <>
             <div className="wholeSite">
+
                 <div className="leftContainer">
+
                     <h3>{props.filmInfo.title}</h3>
-                    <iframe alt={props.filmInfo.link}></iframe>
+
+                    <iframe src={props.filmInfo.link} alt="xd" allowFullScreen/>
+
                     <div className="descSection">
-                        <p style={{fontWeight:"bold"}}>{props.filmInfo.ownerName}</p>
-                        <p>{props.filmInfo.desc}</p>
+
+                        <p style={{fontWeight:"bold"}}>
+                            {props.filmInfo.ownerName}
+                        </p>
+
+                        <p>
+                            {props.filmInfo.desc}
+                        </p>
+
                         {props.currentUserData.isLogged == "true" ? 
-                        <button className="likeButton" onClick={()=>{props.onLiked(props.filmInfo.filmKey, props.currentUserData.key)}}>Like</button> : `${props.filmInfo.lajki.length}`}
+                            <button className="likeButton" 
+                                    onClick={()=>{props.onLiked(props.filmInfo.filmKey, props.currentUserData.key)}}>
+                                        Like
+                            </button> 
+                        : ""}
+
+                        <div>Likes: {props.filmInfo.likes.length}</div>
+                        <div>Unlikes: {props.filmInfo.disLikes.length}</div>
+                        
                     </div>
+
+
                     <div className="commentsSection">
-                        {props.currentUserData.isLogged == "true" ? <div>
-                            <input type="text" value={newComment} onChange={(e)=>{setNewComment(e.target.value)}} placeholder="Your Comment..."/>
-                            <button onClick={addNewComment}>Share Comment</button>
-                        </div> : ""}
+
+                        {props.currentUserData.isLogged == "true" ? 
+                            <div>
+                                <input type="text" 
+                                        value={newComment} 
+                                        onChange={(e)=>{setNewComment(e.target.value)}} 
+                                        placeholder="Your Comment..."
+                                />
+
+                                <button onClick={addNewComment}>
+                                    Share Comment
+                                </button>
+                            </div> 
+                        : ""}
                         
                         {props.comments.map((comment)=>{
                             if (comment.filmKey == props.filmInfo.filmKey){
@@ -49,7 +80,9 @@ const FilmPage = (props) => {
                     </div>
 
                 </div>
+                
                 <div className="rightContainer">
+
                     <h3>Next Films</h3>
                     
                     {props.films.map((film)=>{

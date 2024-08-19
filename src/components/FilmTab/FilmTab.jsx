@@ -10,7 +10,8 @@ const FilmTab = (props) => {
                 <p>{props.filmInfo.desc}</p>
                 <hr />
                 <p style={{fontWeight:"bold"}}>{props.filmInfo.ownerName}</p>
-                <p>{props.filmInfo.lajki.length}</p>
+                <p>Likes: {props.filmInfo.likes.length}</p>
+                <p>Unlikes: {props.filmInfo.disLikes.length}</p>
             </div>
         
         </>
