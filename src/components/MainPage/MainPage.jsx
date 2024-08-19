@@ -39,25 +39,49 @@ const MainPage = (props) => {
         <>
             <div className="navBar">
                 <button onClick={()=>{setIsUserAccountDetails(false); setIsFilmPage(false)}}>Main</button>
-                <input type="text" placeholder="Search for films" value={keyPhrase} onChange={(e)=>{setKeyPhrase(e.target.value)}}/>
+                <input type="text" placeholder="Search for films" value={keyPhrase} onChange={(e)=>{setKeyPhrase(e.target.value); setIsFilmPage(false)}}/>
                 {props.currentUserData.isLogged == "true" ? <div><button onClick={()=>{setIsUploading(!isUploading)}}>{isUploading ? "Cancel Uploading" : "Upload New Film"}</button><button onClick={isUserAccountDetails ? ()=>{props.onLogOut()} : ()=>{setIsUserAccountDetails(true);setIsFilmPage(false)}}>{isUserAccountDetails ? "Log out" : `${props.currentUserData.name}`}</button></div> : <button onClick={()=>{props.onLoginForm()}}>Login</button>}
             </div>  
             <div className="mainContainer">
-                {isUserAccountDetails && props.currentUserData.isLogged == "true" && !isUploading? <UserSettings onOpenFilm={openFilmPage} onChangePass={props.onChangePass} onChangeName={props.onChangeName} films={props.films} currentUserData={props.currentUserData}/>: ""}
-                {isFilmPage && !isUploading ? <FilmPage onLiked={props.onLiked} onCreateComment={props.onCreateComment} comments={props.comments} filmInfo={currentFilmInfo} currentUserData={props.currentUserData} />: ""}
-                {(!isFilmPage && !isUserAccountDetails && !isUploading ) || (props.currentUserData.isLogged == "false" && !isFilmPage)? 
+                {isUserAccountDetails && props.currentUserData.isLogged == "true" && !isUploading? <UserSettings 
+                                                                                                    onOpenFilm={openFilmPage} 
+                                                                                                    onChangePass={props.onChangePass} 
+                                                                                                    onChangeName={props.onChangeName} 
+                                                                                                    films={props.films} 
+                                                                                                    currentUserData={props.currentUserData}/>
+                                                                                                    : ""}
+                
+                {isFilmPage && !isUploading ? 
+                <FilmPage 
+                    onLiked={props.onLiked} 
+                    onCreateComment={props.onCreateComment} 
+                    onOpenFilm={openFilmPage}
+                    comments={props.comments} 
+                    filmInfo={currentFilmInfo} 
+                    films={props.films}
+                    currentUserData={props.currentUserData} 
+                />: ""}
+
+
+                {(!isFilmPage && !isUserAccountDetails && !isUploading ) || (props.currentUserData.isLogged == "false" && !isFilmPage) ? 
                     <div className="filmContainer">
                         {props.films.map((film)=>{
                             if(keyPhrase == "") {
-                                return <FilmTab filmInfo={film}
-                                onOpenFilm={openFilmPage}/>
+                                return <FilmTab 
+                                            filmInfo={film}
+                                            onOpenFilm={openFilmPage}
+                                        />
                             }else if (keyPhrase == film.ownerKey || keyPhrase == film.ownerName || film.title == keyPhrase) {
-                                return <FilmTab filmInfo={film}
-                                onOpenFilm={openFilmPage}/>
+                                return <FilmTab 
+                                            filmInfo={film}
+                                            onOpenFilm={openFilmPage}
+                                        />
                             }
                         })}
                     </div>
                 : ""}
+
+
                 {isUploading ? 
                     <div className="uploadingDiv"> 
                         <h1>Uploading Form</h1>
@@ -67,6 +91,8 @@ const MainPage = (props) => {
                         <button onClick={()=>{uploadNewFilm()}}>Upload</button>
                     </div>
                 : ""}
+
+
             </div>
         </>
     )

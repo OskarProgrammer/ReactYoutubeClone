@@ -168,8 +168,20 @@ function App() {
 
   return (
     <>
-      {!isLoginForm ? <MainPage onUpload={uploadFilm} onLiked={likeVideo} onCreateComment={createComment} onLogOut={logOut} onChangePass={changePassword} onChangeName={changeName} onLoginForm={()=>{setIsLoginForm(true)}} comments={comments} films={films} currentUserData={currentUserData}/> : ""}
-      {isLoginForm ? <LoginForm onBack={()=>{setIsLoginForm(false)}} handleLogin={loginToSite}/> : ""}
+      {!isLoginForm ? <MainPage 
+          onUpload={uploadFilm} 
+          onLiked={likeVideo} 
+          onCreateComment={createComment} 
+          onLogOut={logOut} 
+          onChangePass={changePassword} 
+          onChangeName={changeName} 
+          onLoginForm={()=>{setIsLoginForm(true)}} 
+          comments={comments} 
+          films={films} 
+          currentUserData={currentUserData}/> : ""}
+      {isLoginForm ? <LoginForm 
+          onBack={()=>{setIsLoginForm(false)}} 
+          handleLogin={loginToSite}/> : ""}
     </>
   )
 }

@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react"
 import Comment from "../Comment/Comment"
+import FilmRecomended from "../FilmRecomended/FilmRecomended"
 import "./FilmPage.css"
 
 
@@ -10,14 +11,13 @@ const FilmPage = (props) => {
 
     const addNewComment = () => {
         if (newComment != ""){
-            props.onCreateComment(props.filmInfo.filmKey,  props.currentUserData.key, props.currentUserData.name,
-                newComment
-            )
+            props.onCreateComment(props.filmInfo.filmKey,  
+                                props.currentUserData.key, 
+                                props.currentUserData.name,
+                                newComment)
             setNewComment("")
         }
     }
-
-
 
 
     return (
@@ -49,7 +49,19 @@ const FilmPage = (props) => {
                     </div>
 
                 </div>
-                <div className="rightContainer">Next Films</div>
+                <div className="rightContainer">
+                    <h3>Next Films</h3>
+                    
+                    {props.films.map((film)=>{
+                        if (film.filmKey != props.filmInfo.filmKey) {
+                            return <FilmRecomended
+                                        filmInfo = {film}
+                                        onOpenFilm={props.onOpenFilm}
+                                    />
+                        }
+                    })}
+
+                </div>
             </div>
         </>
     )
